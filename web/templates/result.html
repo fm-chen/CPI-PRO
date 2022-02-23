@@ -1,0 +1,35 @@
+ <table class="table">
+          <thead>
+            <tr>
+              <th>File Name</th>
+                <th>Publish Date</th>
+                <th>Hit Snippets (click text to expand more)</th>
+              <th>Location</th>
+              <th> </th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for document in results %}
+              <tr>
+                <td>{{ document['file_name'] }}</td>
+                  <td>{{ document['date'] }}</td>
+                  <td>
+                  <button class="collapsible">{{ document['snippets'][0] | safe }}</button>
+                    <div class="content">
+                        {% for snippet_items in document['snippets'] %}
+                            <p><b>Hit #{{ loop.index }}:</b> {{ snippet_items | safe }}</p>
+                        {% endfor %}
+                    </div>
+                  </td>
+                <td><a class="get-file btn btn-primary mb-2">Get it
+                <div class="base64txt" style="display: None">{{ document['base64'] }}</div>
+                </a></td>
+
+
+              </tr>
+            {% endfor %}
+
+          </tbody>
+        </table>
+
+
